@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Not found | osu! trivia{% endblock %}
+{% block content %}
+<div class="narrow section center">
+  <h1>Page not found</h1>
+  <p class="lead lead--center">That page doesn’t exist, or it’s keeping itself private.</p>
+  <a class="btn btn--pink" href="{% url 'home' %}">Back home</a>
+</div>
+{% endblock %}

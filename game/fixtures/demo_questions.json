@@ -1,0 +1,73 @@
+[
+  {
+    "prompt": "Name a game mode in osu!",
+    "hint": "Any of the official modes counts.",
+    "answers": [
+      {"text": "osu!standard", "aliases": ["osu", "standard", "std", "osu standard", "circles"], "tier": 1},
+      {"text": "Taiko", "aliases": ["drums", "osu!taiko"], "tier": 2},
+      {"text": "Mania", "aliases": ["osu!mania", "keys", "piano"], "tier": 3},
+      {"text": "Catch", "aliases": ["ctb", "catch the beat", "osu!catch", "fruits"], "tier": 3}
+    ]
+  },
+  {
+    "prompt": "Name a mod you can turn on in osu!",
+    "hint": "Gameplay mods, e.g. the ones shown in the mod select screen.",
+    "answers": [
+      {"text": "Hidden", "aliases": ["HD"], "tier": 1},
+      {"text": "Hard Rock", "aliases": ["HR"], "tier": 1},
+      {"text": "Double Time", "aliases": ["DT"], "tier": 1},
+      {"text": "No Fail", "aliases": ["NF"], "tier": 2},
+      {"text": "Easy", "aliases": ["EZ"], "tier": 2},
+      {"text": "Half Time", "aliases": ["HT"], "tier": 3},
+      {"text": "Flashlight", "aliases": ["FL"], "tier": 3},
+      {"text": "Nightcore", "aliases": ["NC"], "tier": 3},
+      {"text": "Sudden Death", "aliases": ["SD"], "tier": 3},
+      {"text": "Perfect", "aliases": ["PF"], "tier": 4},
+      {"text": "Relax", "aliases": ["RX"], "tier": 4},
+      {"text": "Autopilot", "aliases": ["AP"], "tier": 4},
+      {"text": "Spun Out", "aliases": ["SO"], "tier": 4},
+      {"text": "Mirror", "aliases": [], "tier": 5},
+      {"text": "Fade In", "aliases": ["FI"], "tier": 5},
+      {"text": "Cinema", "aliases": ["CN"], "tier": 5},
+      {"text": "Touch Device", "aliases": ["TD"], "tier": 5},
+      {"text": "Score V2", "aliases": ["SV2", "ScoreV2"], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a letter grade you can get on an osu! play",
+    "hint": "The big letter on the results screen.",
+    "answers": [
+      {"text": "S", "aliases": [], "tier": 1},
+      {"text": "A", "aliases": [], "tier": 1},
+      {"text": "B", "aliases": [], "tier": 2},
+      {"text": "SS", "aliases": ["X"], "tier": 2},
+      {"text": "C", "aliases": [], "tier": 3},
+      {"text": "D", "aliases": [], "tier": 3},
+      {"text": "Silver S", "aliases": ["SH", "S Hidden", "silver"], "tier": 5},
+      {"text": "Silver SS", "aliases": ["SSH", "XH", "SS Hidden"], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a beatmap status",
+    "hint": "The state a map can be in on the osu! website.",
+    "answers": [
+      {"text": "Ranked", "aliases": [], "tier": 1},
+      {"text": "Loved", "aliases": [], "tier": 2},
+      {"text": "Graveyard", "aliases": ["grave"], "tier": 2},
+      {"text": "Pending", "aliases": [], "tier": 3},
+      {"text": "Qualified", "aliases": [], "tier": 3},
+      {"text": "Work in Progress", "aliases": ["WIP"], "tier": 4},
+      {"text": "Approved", "aliases": [], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a hit result in osu!standard",
+    "hint": "What a circle can be judged as.",
+    "answers": [
+      {"text": "300", "aliases": ["three hundred", "great"], "tier": 1},
+      {"text": "100", "aliases": ["one hundred", "ok"], "tier": 2},
+      {"text": "50", "aliases": ["fifty", "meh"], "tier": 3},
+      {"text": "Miss", "aliases": ["0", "x", "missed"], "tier": 2}
+    ]
+  }
+]

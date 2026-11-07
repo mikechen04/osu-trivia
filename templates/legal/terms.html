@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load trivia %}
+{% block title %}Terms of Service | osu! trivia{% endblock %}
+{% block content %}
+<div class="narrow section prose legal">
+  <h1>Terms of Service</h1>
+  <p class="muted">Effective date: {% placeholder "effective_date" %}</p>
+
+  <p>These terms cover your use of osu! trivia, a free, unofficial fan game run by an individual (“we”). By signing in or using the site you agree to them and to the <a href="{% url 'privacy' %}">Privacy Policy</a>.</p>
+
+  <h2>1. Who can use it</h2>
+  <p>You must be at least <strong>13 years old</strong> and have an osu! account in good standing. If you’re under the age of majority where you live, you confirm a parent or guardian is fine with you using the site.</p>
+
+  <h2>2. Not affiliated with osu!</h2>
+  <div class="callout">osu! trivia is an independent fan project. It is <strong>not affiliated with, endorsed by, sponsored by, or connected to ppy Pty Ltd or osu!</strong>. “osu!” and related names and marks belong to their owners and are used here only to describe what the game is about. We use osu!’s public sign-in; that doesn’t make us part of osu!.</div>
+
+  <h2>3. Your account</h2>
+  <p>You sign in through osu!. You’re responsible for activity on your account. You get one attempt per day. Your username, avatar and country come from osu! and are shown publicly as described in the Privacy Policy. You can delete your account at any time from your account page.</p>
+
+  <h2>4. Acceptable use</h2>
+  <p>Please play fair and be decent. You agree not to:</p>
+  <ul>
+    <li>use bots, scripts, automation, or multiple accounts to play, to gain extra attempts, or to influence rarity statistics or leaderboards;</li>
+    <li>try to read, scrape or guess the accepted answers or tiers other than by playing normally, or share live answers in a way meant to spoil or manipulate the game;</li>
+    <li>probe for security holes, overload the site, bypass rate limits or the timer, or interfere with other players;</li>
+    <li>submit suggestions or answers that are unlawful, hateful, harassing, sexually explicit, spam, or that contain other people’s personal information;</li>
+    <li>use the site to harass anyone or to break osu!’s own rules or terms.</li>
+  </ul>
+  <p>We may remove scores, hide or ban accounts, or reject content at our discretion, usually without prior notice for cheating or abuse.</p>
+
+  <h2 id="suggestions">5. Question suggestions and your content</h2>
+  <p>You keep ownership of anything you submit (such as question suggestions and example answers). By submitting it, you give us a non-exclusive, worldwide, royalty-free, perpetual, sublicensable licence to use, edit, adapt, combine, publish and display it as part of osu! trivia and its promotion, including as a published question and accepted answers, with or without credit. We’re under no obligation to publish, credit or pay for any suggestion, and we review every one by hand. You promise that you have the right to give us this licence and that your suggestion doesn’t infringe anyone’s rights. If you later delete your account, content we have already published or approved may remain, detached from your name.</p>
+
+  <h2>6. Our content</h2>
+  <p>The site, its design, code and the questions we publish are ours or used with permission. You may share your own results and screenshots freely. Please don’t copy the question set or the site wholesale.</p>
+
+  <h2>7. Availability and changes</h2>
+  <p>This is a hobby project. We may change, pause or end the site, the rules, or the scoring, and reset or correct scores, at any time. Leaderboards are for fun and carry no prizes unless we say otherwise.</p>
+
+  <h2>8. Disclaimers</h2>
+  <p>The site is provided “as is” and “as available”, without warranties of any kind, express or implied, including fitness for a particular purpose, accuracy of questions or answers, and uninterrupted or error-free operation. Trivia answers can be arguable or become out of date.</p>
+
+  <h2>9. Limitation of liability</h2>
+  <p>To the fullest extent permitted by law, we aren’t liable for any indirect, incidental, special, consequential or punitive damages, or for lost data, profits or goodwill, arising from your use of the site. Our total liability for any claim is limited to USD $50. Some places don’t allow these limits, so they apply only as far as the law of your place permits, and nothing here limits rights you can’t waive by law.</p>
+
+  <h2>10. Ending things</h2>
+  <p>You can stop using the site and delete your account whenever you like. We can suspend or end your access if you break these terms. Sections that by their nature should survive (content licence for published material, disclaimers, liability, governing law) will.</p>
+
+  <h2>11. Governing law</h2>
+  <p>These terms are governed by the laws of {% placeholder "jurisdiction" %}, without regard to conflict-of-law rules. Courts in that jurisdiction have exclusive jurisdiction, except that consumers keep any mandatory rights in their home country.</p>
+
+  <h2>12. Changes to these terms; contact</h2>
+  <p>If we update these terms we’ll change the effective date above; continuing to use the site afterwards means you accept the new version. Questions: <strong>{% placeholder "contact_email" %}</strong>.</p>
+</div>
+{% endblock %}

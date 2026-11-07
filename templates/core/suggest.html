@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Suggest a question | osu! trivia{% endblock %}
+{% block content %}
+<div class="narrow section">
+  <h1>Suggest a question</h1>
+  <p class="lead">Got a question idea? Send it over. A real person reads every one, and nothing goes live on its own.</p>
+
+  <div class="card">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <div class="field">
+        <label for="{{ form.text.id_for_label }}">{{ form.text.label }}</label>
+        {{ form.text }}
+        <div class="help">{{ form.text.help_text }}</div>
+        {{ form.text.errors }}
+      </div>
+      <div class="field">
+        <label for="{{ form.examples.id_for_label }}">{{ form.examples.label }}</label>
+        {{ form.examples }}
+        <div class="help">{{ form.examples.help_text }}</div>
+        {{ form.examples.errors }}
+      </div>
+      <p class="small muted serious">By submitting you agree to the <a href="{% url 'terms' %}#suggestions">suggestion licence in the Terms</a>. You have {{ left }} suggestion{{ left|pluralize }} left today.</p>
+      <button class="btn btn--pink" type="submit"{% if not left %} disabled{% endif %}>Send suggestion</button>
+    </form>
+  </div>
+
+  {% if mine %}
+  <div class="card mt-l">
+    <h2>Your recent ideas</h2>
+    <ul class="recap">
+      {% for s in mine %}
+        <li><span class="tier {% if s.status == 'approved' %}tier-2{% elif s.status == 'rejected' %}tier-0{% else %}tier-3{% endif %}">{{ s.get_status_display }}</span><span class="q">{{ s.text }}</span><span class="muted small">{{ s.created_at|date:"M j" }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

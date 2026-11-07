@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Play | osu! trivia{% endblock %}
+{% block content %}
+<div class="wrap section">
+  <h1 class="vh">Today’s osu! trivia</h1>
+  <div id="game" class="game"
+       data-state-url="{% url 'api_state' %}"
+       data-next-url="{% url 'api_next' %}"
+       data-answer-url="{% url 'api_answer' %}"
+       data-leaderboard-url="{% url 'leaderboard' %}"
+       data-avatar="{{ user.avatar_url }}"
+       data-name="{{ user.display_name }}">
+    <noscript><div class="card"><p>This game needs JavaScript to run the question timer. Please enable it and reload.</p></div></noscript>
+    <div class="card"><p class="muted">Loading today’s set…</p></div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/game.js' %}" defer></script>{% endblock %}

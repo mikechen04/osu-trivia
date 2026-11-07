@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Sign in | osu! trivia{% endblock %}
+{% block content %}
+<div class="narrow section">
+    <h1>Sign in</h1>
+    <p class="muted">Sign in with your osu! account to play and show up on the leaderboard. We only ask osu! for your public profile (the <code>identify</code> permission): your user id, username, avatar and country. We never see your password and can’t touch your account.</p>
+
+    {% if error %}<div class="alert" role="alert">{{ error }}</div>{% endif %}
+
+    <form method="post" action="{% url 'login' %}" class="mt-l">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <div class="field">
+        <label class="check serious">
+          <input type="checkbox" name="agree" required>
+          <span>I’m at least 13 years old and I accept the <a href="{% url 'terms' %}" target="_blank" rel="noopener">Terms of Service</a> and <a href="{% url 'privacy' %}" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+        </label>
+      </div>
+      <button class="btn btn--pink btn--lg" type="submit">Continue with osu!</button>
+    </form>
+
+    {% if dev_login %}
+      <p class="small mt-l"><a href="{% url 'dev_login' %}?next={{ next|urlencode }}">Developer sign-in (local only)</a></p>
+    {% endif %}
+</div>
+{% endblock %}

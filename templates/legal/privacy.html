@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load trivia %}
+{% block title %}Privacy Policy | osu! trivia{% endblock %}
+{% block content %}
+<div class="narrow section prose legal">
+  <h1>Privacy Policy</h1>
+  <p class="muted">Effective date: {% placeholder "effective_date" %}</p>
+
+  <p>osu! trivia is a small, unofficial hobby project run by an individual (“we”). This page explains what we collect, why, and what you can do about it. We’ve tried to keep it short and honest.</p>
+
+  <div class="callout"><strong>Short version:</strong> we use your public osu! profile and your answers to run the game and the leaderboards. No ads, no analytics, no selling data. You can export or delete everything yourself from your <a href="{% url 'account' %}">account page</a>.</div>
+
+  <h2>1. What we collect</h2>
+  <div class="table-scroll"><table class="data">
+    <thead><tr><th>Data</th><th>Where it comes from</th></tr></thead>
+    <tbody>
+      <tr><td>osu! user id, username, avatar URL, country code</td><td>Your public osu! profile, via osu! sign-in with the <code>identify</code> permission only. Refreshed every time you sign in.</td></tr>
+      <tr><td>Your answers (as typed), the time each question was shown and answered, the tier and points you got, and your daily scores</td><td>Playing the game.</td></tr>
+      <tr><td>Question suggestions and example answers you send</td><td>The suggestion form.</td></tr>
+      <tr><td>When you accepted the Terms, and your visibility choice</td><td>Signing in and your account settings.</td></tr>
+      <tr><td>IP address and browser details</td><td>Your connection to the site. Used briefly for abuse prevention (see 4) and kept in standard server logs by our host.</td></tr>
+    </tbody>
+  </table></div>
+  <p>We do <strong>not</strong> receive your osu! password, email address, friends, messages or any other osu! data, and we can’t act on your osu! account. The osu! access token is used once to read your profile and is then discarded; we don’t store it.</p>
+
+  <h2>2. Why we use it</h2>
+  <ul>
+    <li>To sign you in and run the daily game (scoring, one attempt per day, enforcing the timer).</li>
+    <li>To show leaderboards and public result pages (see 3).</li>
+    <li>To work out how rare each answer is, using everyone’s answers combined.</li>
+    <li>To prevent cheating, abuse and overload (rate limiting, replay protection).</li>
+    <li>To review question suggestions.</li>
+  </ul>
+  <p>Where GDPR applies, our legal bases are performing the service you asked for (playing) and our legitimate interest in keeping a small site secure and fair. We don’t rely on consent for anything optional, because there is nothing optional being collected.</p>
+
+  <h2>3. What is public</h2>
+  <p>Your osu! username, avatar, country flag and scores appear on the leaderboards, and anyone with the link can open your result page (<code>/u/&lt;username&gt;/&lt;date&gt;</code>), which shows your score and a row of tier colours but never your answers. You can switch both off in your account settings. Your answers themselves are never shown publicly, though they are counted anonymously in the “most popular answers” statistics.</p>
+
+  <h2>4. Who else is involved</h2>
+  <ul>
+    <li><strong>osu! / ppy</strong> runs the sign-in. Your avatar is loaded directly from osu!’s servers, so they see your IP address when your browser fetches it. See osu!’s own privacy policy.</li>
+    <li><strong>Our hosting provider</strong> runs the servers and database and keeps standard request logs (typically including IP addresses) for a limited time, commonly around 30 days.</li>
+  </ul>
+  <p>We don’t use analytics, advertising or tracking services, and we don’t sell or share your data for advertising. Your data may be processed in countries other than your own, where our host operates.</p>
+  <p>Rate limiting keeps short-lived counters (a few minutes to a couple of hours) keyed by a one-way hash of your IP address or user id.</p>
+
+  <h2>5. How long we keep it</h2>
+  <ul>
+    <li><strong>Profile, answers and scores:</strong> until you delete your account.</li>
+    <li><strong>Suggestions:</strong> unreviewed or rejected suggestions are deleted with your account. If a suggestion was approved and may already be in the question pool, it stays but is detached from you.</li>
+    <li><strong>Server logs:</strong> as long as our host keeps them (see 4).</li>
+    <li><strong>Backups</strong> may hold deleted data for a short time before they roll over.</li>
+  </ul>
+
+  <h2>6. Your rights</h2>
+  <p>Whoever you are and wherever you live, you can use the buttons on your <a href="{% url 'account' %}">account page</a> to:</p>
+  <ul>
+    <li><strong>Get a copy</strong> of your data (“Export my data”, a JSON file).</li>
+    <li><strong>Delete</strong> your account and play history (“Delete my account”).</li>
+    <li><strong>Hide</strong> yourself from leaderboards and public pages.</li>
+  </ul>
+  <p>If you’re in the EU/UK (GDPR) you also have the right to correct your data (it updates from osu! when you sign in), to restrict or object to processing, and to complain to your local data protection authority. If you’re in California (CCPA/CPRA) you have the right to know, delete and correct your personal information, and not to be discriminated against for using these rights. We don’t sell or share personal information as those laws define it. For anything the buttons don’t cover, email <strong>{% placeholder "contact_email" %}</strong>; we aim to reply within 30 days.</p>
+
+  <h2>7. Children</h2>
+  <p>You must be at least 13 to use osu! trivia. We don’t knowingly collect data from anyone younger. If you think a child under 13 has an account, contact us and we’ll delete it.</p>
+
+  <h2>8. Security</h2>
+  <p>The site runs over HTTPS only, the osu! client secret stays on the server, and sessions use secure cookies. No system is perfectly secure, so please don’t reuse sensitive information in answers or suggestions.</p>
+
+  <h2>9. Changes</h2>
+  <p>If we change this policy in a meaningful way we’ll update the effective date above. Continued use after a change means you accept it.</p>
+
+  <h2>10. Contact</h2>
+  <p>{% placeholder "contact_email" %}</p>
+
+  <p class="small muted">osu! trivia is not affiliated with ppy Pty Ltd or osu!.</p>
+</div>
+{% endblock %}

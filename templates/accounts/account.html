@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Your account | osu! trivia{% endblock %}
+{% block content %}
+<div class="narrow section">
+  <h1>Your account</h1>
+  <div class="usercard">
+    <div class="usercard__cover"></div>
+    <div class="usercard__body">
+      {% include "partials/avatar.html" with u=user size="lg" %}
+      <div class="usercard__name">{{ user.display_name }} {% include "partials/flag.html" with code=user.country_code %}</div>
+      <div class="muted small">osu! user id {{ user.osu_id }}. Your profile refreshes from osu! every time you sign in.</div>
+      <div class="usercard__stats">
+        <div class="stat"><b>{{ days_played }}</b><span>Days played</span></div>
+        <div class="stat"><b>{{ total }}</b><span>Total points</span></div>
+        <div class="stat"><b>{{ best }}</b><span>Best day</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-l">
+    <h2>Visibility</h2>
+    <form method="post">
+      {% csrf_token %}
+      <label class="check">
+        <input type="checkbox" name="is_public"{% if user.is_public %} checked{% endif %}>
+        <span>Show me on the leaderboards and let people see my result pages (<code>/u/…</code>). Untick to hide both.</span>
+      </label>
+      <button class="btn mt" type="submit">Save</button>
+    </form>
+  </div>
+
+  <div class="card mt-l serious">
+    <h2>Your data</h2>
+    <p class="muted">Download everything we store about you (profile, answers, scores, suggestions) as a JSON file.</p>
+    <a class="btn" href="{% url 'export_data' %}">Export my data</a>
+  </div>
+
+  <div class="card mt-l serious">
+    <h2>Delete my account</h2>
+    <p class="muted">Permanently removes your profile, answers and scores, and removes you from every leaderboard. This can’t be undone. Details are in the <a href="{% url 'privacy' %}">Privacy Policy</a>.</p>
+    <form method="post" action="{% url 'delete_account' %}">
+      {% csrf_token %}
+      <div class="field">
+        <label for="confirm">Type <strong>DELETE</strong> to confirm</label>
+        <input id="confirm" name="confirm" type="text" autocomplete="off" required>
+      </div>
+      <button class="btn btn--danger" type="submit">Delete my account</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

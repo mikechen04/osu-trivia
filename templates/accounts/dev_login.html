@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Dev sign-in | osu! trivia{% endblock %}
+{% block content %}
+<div class="narrow section">
+  <div class="card">
+    <h1>Developer sign-in</h1>
+    <div class="callout">Only available while <code>DEBUG=1</code>. Creates a fake player so you can test without osu! credentials. Never reachable in production.</div>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <div class="field"><label for="osu_id">Fake osu! id</label><input id="osu_id" name="osu_id" type="number" min="1" value="1001" required></div>
+      <div class="field"><label for="username">Username</label><input id="username" name="username" type="text" maxlength="20" value="TestPlayer" required></div>
+      <div class="field"><label for="country">Country code</label><input id="country" name="country" type="text" maxlength="2" value="US"></div>
+      <div class="field"><label class="check"><input type="checkbox" name="admin"><span>Make this player an admin</span></label></div>
+      <button class="btn btn--pink" type="submit">Sign in</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

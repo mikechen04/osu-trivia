@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Slow down | osu! trivia{% endblock %}
+{% block content %}
+<div class="narrow section center">
+  <h1>Whoa, slow down</h1>
+  <p class="lead lead--center">That was a lot of requests from you or your network. Give it a minute and try again.</p>
+  <a class="btn btn--pink" href="{% url 'home' %}">Back home</a>
+</div>
+{% endblock %}

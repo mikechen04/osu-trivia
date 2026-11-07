@@ -1,0 +1,8 @@
+/* Only use this if you hold a licence for Torus.
+   1. Put your licensed files in static/fonts/ (e.g. Torus-Regular.woff2, Torus-Bold.woff2).
+   2. Copy this file to static/css/torus.css and adjust the file names.
+   3. Set USE_TORUS=1 in the environment.
+   The site CSS already lists "Torus" first in --font and falls back to Exo 2 otherwise. */
+@font-face { font-family: "Torus"; font-weight: 400; font-display: swap; src: url("../fonts/Torus-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Torus"; font-weight: 600; font-display: swap; src: url("../fonts/Torus-SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "Torus"; font-weight: 700; font-display: swap; src: url("../fonts/Torus-Bold.woff2") format("woff2"); }

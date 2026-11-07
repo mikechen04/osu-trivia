@@ -1,0 +1,84 @@
+{% load static trivia %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}osu! trivia: daily rare-answer quiz{% endblock %}</title>
+  <meta name="description" content="{% block description %}A daily osu! trivia game for the community. Five questions, one attempt, and the rarer your answer, the more it scores.{% endblock %}">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <meta name="theme-color" content="#191617">
+  {% block og %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="osu! trivia">
+  <meta property="og:title" content="osu! trivia: daily rare-answer quiz">
+  <meta property="og:description" content="Five osu! questions a day. The rarer your answer, the more it scores.">
+  <meta property="og:url" content="{{ SITE_URL }}{{ request.path }}">
+  <meta name="twitter:card" content="summary">
+  {% endblock %}
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23ff66ab'/%3E%3Ctext x='16' y='23.5' font-size='20' font-weight='700' text-anchor='middle' fill='%23191617' font-family='sans-serif'%3E%3F%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="{% static 'fonts/exo-2-latin-wght-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  {% if USE_TORUS %}<link rel="stylesheet" href="{% static 'css/torus.css' %}">{% endif %}
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="shell nav__in">
+      <a class="brand" href="{% url 'home' %}" aria-label="osu! trivia, home"><span class="brand__osu">osu!</span><span>trivia</span></a>
+      {% with current=request.resolver_match.url_name %}
+      <nav class="nav__links" aria-label="Main">
+        <a href="{% url 'play' %}"{% if current == 'play' %} aria-current="page"{% endif %}>Play</a>
+        <a href="{% url 'leaderboard' %}"{% if current == 'leaderboard' %} aria-current="page"{% endif %}>Leaderboard</a>
+        <a href="{% url 'suggest' %}"{% if current == 'suggest' %} aria-current="page"{% endif %}>Suggest</a>
+        <a href="{% url 'faq' %}"{% if current == 'faq' %} aria-current="page"{% endif %}>FAQ</a>
+      </nav>
+      {% endwith %}
+      <div class="nav__user">
+        {% if user.is_authenticated %}
+          {% if user.is_staff %}<a class="btn btn--ghost btn--sm" href="{{ ADMIN_URL }}">Admin</a>{% endif %}
+          <a class="chip" href="{% url 'account' %}" title="Your account">
+            {% include "partials/avatar.html" with u=user size="sm" %}<span class="chip__name">{{ user.display_name }}</span>
+          </a>
+          <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="btn btn--ghost btn--sm" type="submit">Sign out</button></form>
+        {% else %}
+          <a class="btn btn--pink btn--sm" href="{% url 'login' %}">Sign in with osu!</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="shell panel" tabindex="-1">
+    {% if messages %}
+    <ul class="messages" role="status">
+      {% for message in messages %}<li class="{{ message.tags }}">{{ message }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      <nav aria-label="Footer">
+        <a href="{% url 'faq' %}">FAQ</a>
+        <a href="{% url 'privacy' %}">Privacy Policy</a>
+        <a href="{% url 'terms' %}">Terms of Service</a>
+        <a href="{% url 'cookies' %}">Cookie Policy</a>
+        <a href="{% url 'suggest' %}">Suggest a question</a>
+        <a href="{% url 'faq' %}#contact">Contact</a>
+      </nav>
+      <p class="serious"><strong>osu! trivia</strong> is an unofficial fan project. It is not affiliated with, endorsed by, or connected to ppy Pty Ltd or osu!. “osu!” is a trademark of its respective owner.</p>
+      <p class="serious">Fonts: Exo 2 (SIL Open Font License). Flag glyphs: Twemoji Country Flags, graphics © Twitter, Inc. and other contributors, licensed CC-BY 4.0.</p>
+    </div>
+  </footer>
+
+  <div id="cookie-banner" class="cookie serious" role="region" aria-label="Cookie notice" hidden>
+    <p>We only use cookies that keep you signed in and protect forms. No analytics, no ads. <a href="{% url 'cookies' %}">Cookie Policy</a></p>
+    <button type="button" id="cookie-ok" class="btn btn--pink btn--sm">Got it</button>
+  </div>
+
+  <script src="{% static 'js/site.js' %}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

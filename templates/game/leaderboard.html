@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Leaderboard | osu! trivia{% endblock %}
+{% block content %}
+<div class="wrap section">
+  <h1>Leaderboard</h1>
+
+  <nav class="tabs" aria-label="Leaderboard period">
+    <a href="?tab=daily{% if country %}&amp;country={{ country }}{% endif %}"{% if period == "daily" %} aria-current="page"{% endif %}>Daily</a>
+    <a href="?tab=weekly{% if country %}&amp;country={{ country }}{% endif %}"{% if period == "weekly" %} aria-current="page"{% endif %}>Weekly</a>
+    <a href="?tab=alltime{% if country %}&amp;country={{ country }}{% endif %}"{% if period == "alltime" %} aria-current="page"{% endif %}>All-time</a>
+  </nav>
+
+  <div class="toolbar">
+    <div>
+      {% if period == "daily" %}
+        <div class="daynav">
+          <a class="btn btn--ghost btn--sm" href="?tab=daily&amp;date={{ prev_day|date:'Y-m-d' }}{% if country %}&amp;country={{ country }}{% endif %}" aria-label="Previous day">Prev</a>
+          <span>{{ day|date:"D, M j, Y" }}</span>
+          {% if next_day %}<a class="btn btn--ghost btn--sm" href="?tab=daily&amp;date={{ next_day|date:'Y-m-d' }}{% if country %}&amp;country={{ country }}{% endif %}" aria-label="Next day">Next</a>{% endif %}
+        </div>
+      {% elif period == "weekly" %}
+        <span class="daynav">{{ week.0|date:"M j" }} to {{ week.1|date:"M j, Y" }} (Mon to Sun, UTC)</span>
+      {% else %}
+        <span class="daynav">Every day, all added up</span>
+      {% endif %}
+    </div>
+
+    <form method="get" id="country-form">
+      <input type="hidden" name="tab" value="{{ period }}">
+      {% if period == "daily" %}<input type="hidden" name="date" value="{{ day|date:'Y-m-d' }}">{% endif %}
+      <div>
+        <label for="country" class="small muted">Country</label>
+        <select id="country" name="country" data-country-select>
+          <option value="">🌍 All countries</option>
+          {% for code in countries %}<option value="{{ code }}" data-cc="{{ code }}"{% if code == country %} selected{% endif %}>{{ code }}</option>{% endfor %}
+        </select>
+      </div>
+      <button class="btn btn--sm" type="submit">Apply</button>
+    </form>
+  </div>
+
+  {% if rows %}
+    <ol class="lb" aria-label="Rankings">
+      {% for row in rows %}{% include "partials/lb_row.html" with show_days=True %}{% endfor %}
+    </ol>
+    {% if my_row %}
+      <p class="lb-gap" aria-hidden="true">⋯</p>
+      <ol class="lb" aria-label="Your ranking">{% include "partials/lb_row.html" with row=my_row show_days=True %}</ol>
+    {% endif %}
+    <p class="muted small mt">Only finished sets count. Players who hide in their account settings aren’t listed. The daily max is {{ max_score }}.</p>
+  {% else %}
+    <div class="card empty">
+      {% if period == "daily" %}Nobody’s finished this day’s set yet.{% else %}Nothing here yet.{% endif %}
+      {% if country %}<br>Try “All countries”.{% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/leaderboard.js' %}" defer></script>{% endblock %}

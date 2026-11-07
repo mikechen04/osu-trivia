@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load trivia %}
+{% block title %}FAQ | osu! trivia{% endblock %}
+{% block content %}
+<div class="narrow section prose">
+  <h1>FAQ</h1>
+
+  <details open>
+    <summary>How do I play?</summary>
+    <div>
+      <ol>
+        <li>Sign in with your osu! account.</li>
+        <li>Every day there are 5 open-ended questions, the same for everybody.</li>
+        <li>You get 25 seconds a question. The clock starts when the question shows up, and our server keeps it.</li>
+        <li>Type an answer and lock it in. No take-backs, and only one attempt a day.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>How does scoring work?</summary>
+    <div>
+      <p>Every question has a hand-picked list of accepted answers. If yours isn’t on it, you get 0. If it is, you score by how rare it is:</p>
+      <div class="table-scroll"><table class="data">
+        <thead><tr><th>Tier</th><th>Points</th><th>Feels like</th></tr></thead>
+        <tbody>
+          <tr><td>Osu Chud</td><td>10</td><td>Practically everyone says it</td></tr>
+          <tr><td>Average Player</td><td>30</td><td>Pretty common</td></tr>
+          <tr><td>Mechanically Gifted</td><td>60</td><td>Not many go here</td></tr>
+          <tr><td>Genetics Abuser</td><td>85</td><td>Rare</td></tr>
+          <tr><td>Veiny Zany</td><td>100</td><td>Hardly anyone thinks of it</td></tr>
+        </tbody>
+      </table></div>
+      <p>The best possible day is 500. Your points are fixed the second you lock an answer in.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>How is rarity decided?</summary>
+    <div>
+      <p>Each accepted answer starts with a tier from whoever wrote the question. Once enough people have played, the real share of players who gave each answer gets blended in: the rarer it turns out to be, the higher its tier. With lots of plays, the players decide alone.</p>
+      <p>When you finish, you can peek at the most popular answers for every question.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Why was my answer rejected?</summary>
+    <div>
+      <ul>
+        <li>It isn’t on the accepted list for that question, even if it feels right. Tell us with the <a href="{% url 'suggest' %}">suggestion form</a> or by email.</li>
+        <li>It was too far from an accepted spelling. We ignore capitals, punctuation and spaces, forgive small typos in longer answers, and accept common nicknames (like “HD” for Hidden). Very short answers have to be exact.</li>
+        <li>Your typo was just as close to two different answers, so we couldn’t tell which one you meant.</li>
+        <li>The timer ran out (with a tiny allowance for slow networks), or the answer was empty.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>When do new questions appear?</summary>
+    <div><p>Every day at <strong>00:00 UTC</strong>, and the home page has a live countdown. If the day flips while you’re mid-set, you can finish the question you’re on, but you can’t start new ones from the old set.</p></div>
+  </details>
+
+  <details>
+    <summary>Who can see my results?</summary>
+    <div><p>Finished players show up on the leaderboards. Your result page (<code>/u/&lt;username&gt;/&lt;date&gt;</code>) shows only your score and a row of tier colours, never your answers. You can hide yourself from both in your <a href="{% url 'account' %}">account settings</a>.</p></div>
+  </details>
+
+  <details id="contact">
+    <summary>How do I contact you?</summary>
+    <div><p>Email <strong>{% placeholder "contact_email" %}</strong>. For privacy requests (access, export, deletion) you can also use the buttons on your <a href="{% url 'account' %}">account page</a>.</p></div>
+  </details>
+
+  <div class="callout small serious">osu! trivia is an unofficial fan project and is not affiliated with ppy or osu!.</div>
+</div>
+{% endblock %}

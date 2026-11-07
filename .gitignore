@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+db.sqlite3
+.env
+staticfiles/
+*.log
+node_modules/
+.hallmark/
+package.json
+package-lock.json

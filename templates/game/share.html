@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load trivia %}
+{% block title %}{{ player.display_name }}: {{ attempt.score }}/{{ max_score }} | osu! trivia{% endblock %}
+{% block description %}{{ player.display_name }} scored {{ attempt.score }}/{{ max_score }} on the {{ attempt.date|date:"Y-m-d" }} osu! trivia set.{% endblock %}
+{% block og %}
+  <meta name="robots" content="noindex">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="osu! trivia">
+  <meta property="og:title" content="{{ player.display_name }} scored {{ attempt.score }}/{{ max_score }} on osu! trivia">
+  <meta property="og:description" content="{{ attempt.date|date:'Y-m-d' }} · {{ emoji_row }} · Think you can beat it?">
+  <meta property="og:url" content="{{ page_url }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ player.display_name }} scored {{ attempt.score }}/{{ max_score }} on osu! trivia">
+  <meta name="twitter:description" content="{{ attempt.date|date:'Y-m-d' }} · {{ emoji_row }}">
+{% endblock %}
+{% block content %}
+<div class="narrow section">
+  <h1 class="vh">{{ player.display_name }}’s osu! trivia result for {{ attempt.date|date:"Y-m-d" }}</h1>
+  <div class="usercard">
+    <div class="usercard__cover"></div>
+    <div class="usercard__body">
+      {% include "partials/avatar.html" with u=player size="lg" %}
+      <div class="usercard__name">{{ player.display_name }} {% include "partials/flag.html" with code=player.country_code %}</div>
+      <div class="muted small">osu! trivia on {{ attempt.date|date:"l, F j, Y" }}</div>
+    </div>
+  </div>
+
+  <div class="card center mt-l">
+    <div class="muted">Score</div>
+    <div class="final__score">{{ attempt.score }}<small> / {{ max_score }}</small></div>
+    <div class="emoji-row" role="img" aria-label="Tiers per question: {% for t in tiers %}{{ t.name }}{% if not forloop.last %}, {% endif %}{% endfor %}">{{ emoji_row }}</div>
+    <p class="muted small mt">No answers here, so no spoilers.</p>
+    <div class="cta row row--center"><a class="btn btn--pink btn--lg" href="{% url 'play' %}">Play today’s set</a></div>
+  </div>
+</div>
+{% endblock %}

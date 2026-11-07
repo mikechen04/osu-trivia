@@ -1,0 +1,1 @@
+{% if u.avatar_url %}<img class="avatar avatar--{{ size|default:'md' }}" src="{{ u.avatar_url }}" alt="" loading="lazy" referrerpolicy="no-referrer">{% else %}<span class="avatar avatar--{{ size|default:'md' }} avatar--fallback" aria-hidden="true">{{ u.display_name|slice:":1"|upper }}</span>{% endif %}

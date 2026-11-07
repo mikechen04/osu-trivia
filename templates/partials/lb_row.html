@@ -1,0 +1,12 @@
+<li class="lb-row{% if row.is_me %} is-me{% endif %}"{% if row.is_me %} aria-label="Your row"{% endif %}>
+  <span class="lb-rank"><span class="vh">Rank </span>#{{ row.rank }}</span>
+  {% include "partials/avatar.html" with u=row.user size="md" %}
+  <span class="lb-who">
+    {% if row.user.osu_id %}<a class="lb-name" href="https://osu.ppy.sh/users/{{ row.user.osu_id }}" target="_blank" rel="noopener noreferrer">{{ row.user.display_name }}</a>{% else %}<span class="lb-name">{{ row.user.display_name }}</span>{% endif %}
+    {% include "partials/flag.html" with code=row.user.country_code %}
+  </span>
+  <span>
+    {% if show_days %}<span class="lb-days">{{ row.days }} day{{ row.days|pluralize }}</span>{% endif %}
+    <span class="lb-score">{{ row.score }}</span>
+  </span>
+</li>
