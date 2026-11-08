@@ -1,0 +1,64 @@
+<ol class="slot-list">
+  {% for slot in slots %}
+  <li class="slot {% if not slot.question %}slot--empty{% endif %}">
+    <span class="slot__n" aria-hidden="true">{{ slot.position }}</span>
+    <div class="slot__body">
+      {% if slot.question %}
+        <div class="slot__head">
+          <h3 class="slot__prompt">{{ slot.question.prompt }}</h3>
+          {% if show_unschedule %}
+          <form method="post" action="{% url 'staff_unschedule' pk=slot.question.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn--ghost btn--sm" name="confirm" value="1">Unschedule</button>
+          </form>
+          {% endif %}
+        </div>
+        <p class="slot__meta">
+          <span>{{ slot.answer_count }} accepted</span>
+          <span>{{ slot.plays }} valid play{{ slot.plays|pluralize }}</span>
+          {% if slot.edit_url %}<a href="{{ slot.edit_url }}">edit</a>{% endif %}
+        </p>
+        {% if not compact and slot.rows %}
+        <div class="table-scroll">
+          <table class="data rarity">
+            <thead>
+              <tr>
+                <th scope="col">Answer</th>
+                <th scope="col">Seed</th>
+                <th scope="col">Live</th>
+                <th scope="col" class="num">Plays</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in slot.rows %}
+              <tr>
+                <td>
+                  <div class="rarity-answer">{{ row.answer.text }}</div>
+                  {% if row.answer.alias_list %}
+                  <div class="alias-row">
+                    {% for a in row.answer.alias_list %}<span class="alias-chip">{{ a }}</span>{% endfor %}
+                  </div>
+                  {% endif %}
+                </td>
+                <td><span class="tier tier-{{ row.seed.level }}">{{ row.seed.name }}</span></td>
+                <td>
+                  <span class="tier tier-{{ row.live.level }}">{{ row.live.name }}</span>
+                  <span class="rarity-pts">{{ row.live.points }}</span>
+                </td>
+                <td class="num">
+                  {{ row.plays }}{% if row.pct != None %}<span class="rarity-pct">{{ row.pct }}%</span>{% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+      {% else %}
+        <h3 class="slot__prompt slot__prompt--empty">Empty slot</h3>
+        <p class="slot__meta">Needs a scheduled question.</p>
+      {% endif %}
+    </div>
+  </li>
+  {% endfor %}
+</ol>

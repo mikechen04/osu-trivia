@@ -127,7 +127,17 @@ class LoginFlowTests(TestCase):
         user = User.objects.get(osu_id=777)
         self.assertEqual((user.osu_username, user.country_code), ("Cookiezi", "KR"))
         self.assertTrue(user.is_staff and user.is_superuser)
+        self.assertEqual(user.role, "admin")
         self.assertEqual(User.objects.count(), 1)
+
+    @mock.patch("accounts.osu.fetch_profile", return_value={**PROFILE, "osu_id": 9632648, "username": "Bootstrap"})
+    @mock.patch("accounts.osu.exchange_code", return_value="tok")
+    def test_default_bootstrap_admin_id(self, *_):
+        with override_settings(ADMIN_OSU_IDS={9632648}):
+            state = self._begin()
+            self.client.get("/auth/callback/", {"code": "abc", "state": state})
+        user = User.objects.get(osu_id=9632648)
+        self.assertTrue(user.is_site_admin)
 
     def test_play_requires_login(self):
         res = self.client.get("/play/")

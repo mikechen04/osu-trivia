@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}{{ day|date:"Y-m-d" }} | Staff | osu! trivia{% endblock %}
+{% block description %}Staff day view with rarities for {{ day|date:"Y-m-d" }}.{% endblock %}
+{% block content %}
+<div class="wrap section staff">
+  <h1>{{ day|date:"Y-m-d" }} UTC</h1>
+
+  {% if day == today %}{% include "staff/_tabs.html" with tab="today" %}
+  {% elif day == tomorrow %}{% include "staff/_tabs.html" with tab="tomorrow" %}
+  {% else %}{% include "staff/_tabs.html" with tab="" %}{% endif %}
+
+  <div class="staff-toolbar">
+    <div class="daynav">
+      <a class="btn btn--ghost btn--sm" href="{% url 'staff_day' day=prev_day %}" aria-label="Previous day">Prev</a>
+      <span class="daynav__date">{{ day|date:"Y-m-d" }}</span>
+      <a class="btn btn--ghost btn--sm" href="{% url 'staff_day' day=next_day %}" aria-label="Next day">Next</a>
+      {% if day != today %}<a class="btn btn--ghost btn--sm" href="{% url 'staff_day' day=today %}">Today</a>{% endif %}
+    </div>
+    {% if ready %}<span class="pill pill--ok">ready, {{ n }}/{{ n }}</span>
+    {% else %}<span class="pill pill--warn">{{ filled }}/{{ n }} filled</span>{% endif %}
+  </div>
+
+  <p class="staff-intro">Seed rarities apply until enough plays land; live rarities blend in after that.</p>
+
+  <section class="staff-card">
+    {% include "staff/_day_slots.html" with slots=slots compact=False show_unschedule=True %}
+  </section>
+
+  {% if free %}
+  <section class="staff-card">
+    <header class="staff-card__head">
+      <h2>Fill empty slots</h2>
+    </header>
+    <p class="staff-help">Assign drafts into the {{ free|length }} open position{{ free|length|pluralize }} on this day.</p>
+    {% if drafts %}
+    <form method="post" action="{% url 'staff_fill_day' day=day %}" class="staff-form">
+      {% csrf_token %}
+      <ul class="draft-list">
+        {% for q in drafts %}
+        <li class="{% if not q.answers.exists %}is-disabled{% endif %}">
+          <label class="draft-check">
+            <input type="checkbox" name="draft_ids" value="{{ q.pk }}" {% if not q.answers.exists %}disabled{% endif %}>
+            <span class="draft-check__text">
+              <span class="draft-check__prompt">{{ q.prompt }}</span>
+              <span class="draft-check__meta">{% if q.answers.exists %}{{ q.answers.count }} answer{{ q.answers.count|pluralize }}{% else %}no answers yet{% endif %}</span>
+            </span>
+          </label>
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="staff-actions">
+        <button type="submit" class="btn btn--pink" name="mode" value="selected">Fill from selected</button>
+        <button type="submit" class="btn btn--blue" name="mode" value="auto">Auto-fill oldest drafts</button>
+      </div>
+    </form>
+    {% else %}
+    <p class="staff-empty">No drafts available. <a href="{{ admin_root }}game/question/add/">Add a question</a>.</p>
+    {% endif %}
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

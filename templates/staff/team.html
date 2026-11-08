@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Team | Staff | osu! trivia{% endblock %}
+{% block description %}Manage moderators and admins.{% endblock %}
+{% block content %}
+<div class="wrap section staff">
+  <h1>Team</h1>
+
+  {% include "staff/_tabs.html" with tab="team" %}
+
+  <p class="staff-intro">
+    Promote players to moderator or admin. Moderators schedule sets and review suggestions.
+    Bootstrap admin ids always stay admin:
+    {% for id in bootstrap_ids %}<code>{{ id }}</code>{% if not forloop.last %}, {% endif %}{% endfor %}.
+  </p>
+
+  <section class="staff-card">
+    <header class="staff-card__head">
+      <h2>Current team</h2>
+    </header>
+    {% if team %}
+    <div class="table-scroll">
+      <table class="data team-table">
+        <thead>
+          <tr>
+            <th scope="col">Player</th>
+            <th scope="col">osu! id</th>
+            <th scope="col">Role</th>
+            <th scope="col"><span class="vh">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for u in team %}
+          <tr>
+            <td class="team-name">{{ u.display_name }}</td>
+            <td class="num">{{ u.osu_id }}</td>
+            <td>
+              <span class="pill {% if u.is_site_admin %}pill--admin{% else %}pill--mod{% endif %}">
+                {% if u.is_site_admin %}admin{% else %}moderator{% endif %}
+              </span>
+            </td>
+            <td class="team-actions">
+              {% if u.osu_id in bootstrap_ids %}
+              <span class="muted small">bootstrap</span>
+              {% elif u.pk == user.pk %}
+              <span class="muted small">you</span>
+              {% else %}
+              <form method="post" action="{% url 'staff_set_role' %}" class="inline-role">
+                {% csrf_token %}
+                <input type="hidden" name="who" value="{{ u.osu_id }}">
+                {% if u.is_site_admin %}
+                <button class="btn btn--ghost btn--sm" name="role" value="moderator" type="submit">Make mod</button>
+                {% else %}
+                <button class="btn btn--ghost btn--sm" name="role" value="admin" type="submit">Make admin</button>
+                {% endif %}
+                <button class="btn btn--ghost btn--sm" name="role" value="player" type="submit">Remove</button>
+              </form>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="staff-empty">No staff yet.</p>
+    {% endif %}
+  </section>
+
+  <section class="staff-card">
+    <header class="staff-card__head">
+      <h2>Add or change someone</h2>
+    </header>
+    <p class="staff-help">They must have signed in at least once. Use their osu! id or exact username.</p>
+    <form method="post" action="{% url 'staff_set_role' %}" class="staff-form role-form">
+      {% csrf_token %}
+      <div class="field">
+        <label for="who">osu! id or username</label>
+        <input id="who" name="who" type="text" required maxlength="64" autocomplete="off" placeholder="9632648">
+      </div>
+      <div class="field">
+        <label for="role">Role</label>
+        <select id="role" name="role">
+          <option value="moderator">moderator — questions &amp; suggestions</option>
+          <option value="admin">admin — everything, including team</option>
+          <option value="player">player — remove staff access</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn--pink">Save role</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

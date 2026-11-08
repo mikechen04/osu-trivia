@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "accounts",
+    "accounts.apps.AccountsConfig",
     "game",
     "core",
 ]
@@ -175,7 +175,9 @@ if not ADMIN_URL.endswith("/"):
 OSU_CLIENT_ID = os.environ.get("OSU_CLIENT_ID", "")
 OSU_CLIENT_SECRET = os.environ.get("OSU_CLIENT_SECRET", "")  # server-side only, never rendered
 OSU_REDIRECT_URI = f"{SITE_URL}/auth/callback/"
-ADMIN_OSU_IDS = {int(x) for x in env_list("ADMIN_OSU_IDS") if x.isdigit()}
+# Hard-coded bootstrap admins (always). Extra ids can be added via ADMIN_OSU_IDS.
+DEFAULT_ADMIN_OSU_IDS = {9632648}
+ADMIN_OSU_IDS = DEFAULT_ADMIN_OSU_IDS | {int(x) for x in env_list("ADMIN_OSU_IDS") if x.isdigit()}
 # Fake sign-in for local development. Hard-disabled unless DEBUG is on.
 DEV_LOGIN = DEBUG and env_bool("DEV_LOGIN", True)
 

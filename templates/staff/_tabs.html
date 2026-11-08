@@ -1,0 +1,7 @@
+<nav class="tabs staff-tabs" aria-label="Staff">
+  <a href="{% url 'staff_home' %}"{% if tab == "home" %} aria-current="page"{% endif %}>Overview</a>
+  <a href="{% url 'staff_day' day=today %}"{% if tab == "today" %} aria-current="page"{% endif %}>Today</a>
+  <a href="{% url 'staff_day' day=tomorrow %}"{% if tab == "tomorrow" %} aria-current="page"{% endif %}>Tomorrow</a>
+  {% if is_site_admin %}<a href="{% url 'staff_team' %}"{% if tab == "team" %} aria-current="page"{% endif %}>Team</a>{% endif %}
+  <a href="{{ admin_root }}">Classic admin</a>
+</nav>

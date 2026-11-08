@@ -1,0 +1,352 @@
+/* osu! trivia admin theme — matches the main site palette and face.
+   Hallmark polish: even type scale and spacing; layout and colours stay. */
+:root {
+  --osu-bg: hsl(252 10% 10%);
+  --osu-panel: hsl(252 10% 19%);
+  --osu-surface: hsl(252 10% 23%);
+  --osu-surface-2: hsl(252 10% 28%);
+  --osu-line: hsl(252 8% 30%);
+  --osu-text: hsl(252 25% 97%);
+  --osu-muted: hsl(252 10% 74%);
+  --osu-accent: hsl(255 100% 70%);
+  --osu-accent-text: hsl(255 100% 82%);
+  --osu-pink: hsl(333 100% 72%);
+  --osu-btn-pink: hsl(333 55% 44%);
+  --osu-ok: hsl(150 60% 66%);
+  --osu-err: hsl(355 100% 76%);
+  --osu-font: "Exo 2", "Torus", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --osu-label: 0.8125rem;
+  --osu-meta: 0.875rem;
+  --osu-title: 1.125rem;
+  --osu-pad: 16px;
+  --osu-gap: 16px;
+  --osu-radius: 8px;
+}
+
+html[data-theme="dark"],
+html[data-theme="auto"] {
+  --primary: var(--osu-accent);
+  --secondary: var(--osu-panel);
+  --accent: var(--osu-accent);
+  --primary-fg: var(--osu-bg);
+  --body-fg: var(--osu-text);
+  --body-bg: var(--osu-bg);
+  --body-quiet-color: var(--osu-muted);
+  --body-loud-color: var(--osu-text);
+  --header-color: var(--osu-text);
+  --header-branding-color: var(--osu-text);
+  --header-bg: var(--osu-panel);
+  --header-link-color: var(--osu-accent-text);
+  --breadcrumbs-fg: var(--osu-muted);
+  --breadcrumbs-link-fg: var(--osu-accent-text);
+  --breadcrumbs-bg: var(--osu-surface);
+  --link-fg: var(--osu-accent-text);
+  --link-hover-color: var(--osu-pink);
+  --link-selected-fg: var(--osu-pink);
+  --hairline-color: var(--osu-line);
+  --border-color: var(--osu-line);
+  --darkened-bg: var(--osu-surface);
+  --selected-bg: var(--osu-surface-2);
+  --selected-row: hsl(255 30% 22%);
+  --button-bg: var(--osu-btn-pink);
+  --button-hover-bg: hsl(333 55% 50%);
+  --default-button-bg: var(--osu-accent);
+  --default-button-hover-bg: hsl(255 100% 78%);
+  --close-button-bg: var(--osu-surface-2);
+  --close-button-hover-bg: var(--osu-line);
+  --object-tools-bg: var(--osu-surface-2);
+  --object-tools-hover-bg: var(--osu-line);
+}
+
+html[data-theme="light"] {
+  color-scheme: dark;
+}
+
+@font-face {
+  font-family: "Exo 2";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/exo-2-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+html, body, input, textarea, select, button, .button, a.button {
+  font-family: var(--osu-font) !important;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#header {
+  border-bottom: 1px solid var(--osu-line);
+  padding: 12px var(--osu-pad);
+}
+#branding {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+#branding h1 {
+  margin: 0;
+  font-size: var(--osu-title);
+  line-height: 1.3;
+}
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--osu-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+#branding h1 a .brand-osu { color: var(--osu-pink); }
+.admin-logo { display: block; width: 28px; height: 28px; }
+#user-tools {
+  font-size: var(--osu-meta);
+  font-weight: 600;
+}
+#user-tools a { font-weight: 600; }
+
+#content {
+  padding: 24px var(--osu-pad) 40px;
+}
+#content h1 {
+  margin: 0 0 var(--osu-gap);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+#content h2 {
+  margin: 0 0 12px;
+  font-size: var(--osu-title);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.module, .module caption, #changelist-filter h2, .inline-group h2 {
+  border-radius: var(--osu-radius);
+}
+.module {
+  margin-bottom: var(--osu-gap);
+}
+.module h2, .module caption, .inline-group h2 {
+  background: var(--osu-surface-2) !important;
+  color: var(--osu-text) !important;
+  font-weight: 700;
+  font-size: var(--osu-meta) !important;
+  line-height: 1.35;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  padding: 12px 16px !important;
+}
+
+div.breadcrumbs {
+  border-bottom: 1px solid var(--osu-line);
+  font-size: var(--osu-meta);
+  padding: 12px var(--osu-pad);
+  line-height: 1.4;
+}
+
+#changelist .actions {
+  background: var(--osu-surface);
+  padding: 12px;
+  font-size: var(--osu-meta);
+}
+
+.button, input[type="submit"], input[type="button"], .submit-row input, a.button {
+  border-radius: var(--osu-radius) !important;
+  font-weight: 700 !important;
+  font-size: var(--osu-meta) !important;
+  line-height: 1.3 !important;
+  padding: 8px 16px !important;
+}
+
+.object-tools {
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.object-tools a {
+  border-radius: var(--osu-radius);
+  font-weight: 700;
+  font-size: var(--osu-meta);
+  line-height: 1.3;
+  padding: 8px 12px;
+}
+
+.admin-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+  padding: 8px 12px;
+  border-radius: var(--osu-radius);
+  background: var(--osu-surface-2);
+  color: var(--osu-text) !important;
+  text-decoration: none !important;
+  font-weight: 700;
+  font-size: var(--osu-meta);
+  line-height: 1.3;
+}
+.admin-home-link:hover {
+  background: var(--osu-line);
+  color: var(--osu-text) !important;
+}
+.admin-home-link:focus-visible {
+  outline: 2px solid var(--osu-accent);
+  outline-offset: 2px;
+}
+
+#nav-sidebar {
+  background: var(--osu-panel);
+  border-right: 1px solid var(--osu-line);
+}
+#nav-sidebar .current-app a, #nav-sidebar .current-model a {
+  color: var(--osu-accent-text);
+}
+#nav-sidebar .module caption,
+#nav-sidebar .module th,
+#nav-sidebar a {
+  font-size: var(--osu-meta);
+  line-height: 1.4;
+}
+
+/* ---------- simplified home ---------- */
+.simple-admin #content { max-width: 920px; }
+.simple-lead {
+  color: var(--osu-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0 0 24px;
+  max-width: 52ch;
+}
+.simple-lead a { font-weight: 700; }
+.simple-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.simple-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 8px;
+  background: var(--osu-surface);
+  border: 1px solid var(--osu-line);
+  color: var(--osu-text) !important;
+  text-decoration: none !important;
+  transition: border-color 0.12s, background-color 0.12s;
+}
+.simple-card:hover {
+  border-color: var(--osu-accent);
+  background: var(--osu-surface-2);
+}
+.simple-card:focus-visible {
+  outline: 2px solid var(--osu-accent);
+  outline-offset: 2px;
+}
+.simple-card strong {
+  font-size: var(--osu-title);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--osu-accent-text);
+}
+.simple-card span {
+  color: var(--osu-muted);
+  font-size: var(--osu-meta);
+  line-height: 1.45;
+}
+
+/* List + form polish */
+#changelist-filter {
+  background: var(--osu-surface);
+  border-radius: var(--osu-radius);
+}
+#changelist-filter h2,
+#changelist-filter h3 {
+  font-size: var(--osu-meta) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+#changelist-filter li {
+  font-size: var(--osu-meta);
+  line-height: 1.4;
+}
+#changelist table thead th {
+  white-space: nowrap;
+  font-size: var(--osu-label);
+  font-weight: 600;
+  color: var(--osu-muted);
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 12px;
+}
+#changelist table tbody td {
+  font-size: var(--osu-meta);
+  line-height: 1.4;
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.form-row {
+  padding: 12px 0;
+}
+.form-row label,
+label.required {
+  font-size: var(--osu-meta);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.help, .helptext, p.help {
+  font-size: var(--osu-label) !important;
+  line-height: 1.45 !important;
+  color: var(--osu-muted) !important;
+  margin-top: 8px !important;
+}
+.inline-group .tabular td.original p { display: none; }
+.inline-group .tabular tr.has_original td { padding-top: 12px; }
+.inline-group .tabular th,
+.inline-group .tabular td {
+  font-size: var(--osu-meta);
+  line-height: 1.4;
+  padding: 12px;
+  vertical-align: top;
+}
+fieldset.module .description {
+  padding: 12px 16px 0;
+  color: var(--osu-muted);
+  font-size: var(--osu-meta);
+  line-height: 1.45;
+}
+.status {
+  font-weight: 700;
+  text-transform: lowercase;
+  font-size: var(--osu-label);
+}
+.status--pending { color: var(--osu-pink); }
+.status--approved { color: var(--osu-ok); }
+.status--rejected { color: var(--osu-err); }
+
+.submit-row {
+  border-radius: var(--osu-radius);
+  background: var(--osu-surface) !important;
+  padding: 12px 16px !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simple-card { transition: none; }
+}

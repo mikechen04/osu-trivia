@@ -11,7 +11,14 @@
       <div class="field"><label for="osu_id">Fake osu! id</label><input id="osu_id" name="osu_id" type="number" min="1" value="1001" required></div>
       <div class="field"><label for="username">Username</label><input id="username" name="username" type="text" maxlength="20" value="TestPlayer" required></div>
       <div class="field"><label for="country">Country code</label><input id="country" name="country" type="text" maxlength="2" value="US"></div>
-      <div class="field"><label class="check"><input type="checkbox" name="admin"><span>Make this player an admin</span></label></div>
+      <div class="field">
+        <label for="role">Role</label>
+        <select id="role" name="role">
+          <option value="player">player</option>
+          <option value="moderator">moderator</option>
+          <option value="admin" selected>admin</option>
+        </select>
+      </div>
       <button class="btn btn--pink" type="submit">Sign in</button>
     </form>
   </div>

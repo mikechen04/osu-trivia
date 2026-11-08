@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %}Staff | osu! trivia{% endblock %}
+{% block description %}Staff tools for daily sets, drafts and rarities.{% endblock %}
+{% block content %}
+<div class="wrap section staff">
+  <h1>Staff</h1>
+
+  {% include "staff/_tabs.html" with tab="home" %}
+
+  <p class="staff-intro">
+    You’re signed in as
+    <span class="pill {% if role == 'admin' %}pill--admin{% else %}pill--mod{% endif %}">{% if role == "admin" %}admin{% else %}moderator{% endif %}</span>.
+    Mods schedule questions and review suggestions{% if is_site_admin %}; admins also manage the team{% endif %}.
+  </p>
+
+  <div class="staff-stats" role="list">
+    <div class="staff-stat" role="listitem">
+      <span class="staff-stat__label">Today, {{ today|date:"Y-m-d" }}</span>
+      <span class="staff-stat__value {% if today_ready %}is-ok{% else %}is-warn{% endif %}">{% if today_ready %}ready{% else %}incomplete{% endif %}</span>
+    </div>
+    <div class="staff-stat" role="listitem">
+      <span class="staff-stat__label">Tomorrow</span>
+      <span class="staff-stat__value {% if tomorrow_ready %}is-ok{% else %}is-warn{% endif %}">{% if tomorrow_ready %}ready{% else %}{{ tomorrow_free|length }} open{% endif %}</span>
+    </div>
+    <div class="staff-stat" role="listitem">
+      <span class="staff-stat__label">Drafts</span>
+      <span class="staff-stat__value">{{ draft_total }}</span>
+    </div>
+    <div class="staff-stat" role="listitem">
+      <span class="staff-stat__label">Pending suggestions</span>
+      <span class="staff-stat__value">{{ pending_suggestions }}</span>
+    </div>
+  </div>
+
+  <div class="staff-grid">
+    <div class="staff-main">
+      <section class="staff-card">
+        <header class="staff-card__head">
+          <h2>Review suggestions</h2>
+        </header>
+        {% if pending_list %}
+        <ul class="suggest-queue">
+          {% for s in pending_list %}
+          <li class="suggest-item">
+            <div class="suggest-item__body">
+              <p class="suggest-item__prompt">{{ s.text }}</p>
+              <p class="suggest-item__meta">{{ s.user.display_name|default:"someone" }}, {{ s.created_at|date:"Y-m-d H:i" }} UTC</p>
+              {% if s.example_list %}
+              <p class="suggest-item__examples">
+                <span class="suggest-item__examples-label">examples</span>
+                {% for ex in s.example_list %}<span class="alias-chip">{{ ex }}</span>{% endfor %}
+              </p>
+              {% endif %}
+            </div>
+            <div class="suggest-actions">
+              <form method="post" action="{% url 'staff_review_suggestion' pk=s.pk %}">{% csrf_token %}
+                <button class="btn btn--pink btn--sm" name="action" value="approve" type="submit">Approve</button>
+              </form>
+              <form method="post" action="{% url 'staff_review_suggestion' pk=s.pk %}">{% csrf_token %}
+                <button class="btn btn--ghost btn--sm" name="action" value="reject" type="submit">Reject</button>
+              </form>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if pending_suggestions > pending_list|length %}
+        <p class="staff-footnote">Showing {{ pending_list|length }} of {{ pending_suggestions }}.</p>
+        {% endif %}
+        {% else %}
+        <p class="staff-empty">No pending suggestions.</p>
+        {% endif %}
+      </section>
+
+      <section class="staff-card">
+        <header class="staff-card__head">
+          <h2>Today, {{ today|date:"Y-m-d" }} UTC</h2>
+          {% if today_ready %}<span class="pill pill--ok">ready</span>{% else %}<span class="pill pill--warn">incomplete</span>{% endif %}
+        </header>
+        {% include "staff/_day_slots.html" with slots=today_slots compact=True %}
+        <p class="staff-footnote"><a href="{% url 'staff_day' day=today %}">Open today with rarities</a></p>
+      </section>
+
+      <section class="staff-card">
+        <header class="staff-card__head">
+          <h2>Tomorrow, {{ tomorrow|date:"Y-m-d" }} UTC</h2>
+          {% if tomorrow_ready %}<span class="pill pill--ok">ready</span>{% else %}<span class="pill pill--warn">{{ tomorrow_free|length }} open</span>{% endif %}
+        </header>
+        {% include "staff/_day_slots.html" with slots=tomorrow_slots compact=True %}
+        <p class="staff-footnote"><a href="{% url 'staff_day' day=tomorrow %}">Open tomorrow with rarities</a></p>
+      </section>
+    </div>
+
+    <aside class="staff-side">
+      <section class="staff-card">
+        <header class="staff-card__head">
+          <h2>Schedule into tomorrow</h2>
+        </header>
+        <p class="staff-help">Pick drafts that already have accepted answers. Empty tomorrow slots fill first; leftovers spill to the next open days.</p>
+        {% if drafts %}
+        <form method="post" action="{% url 'staff_schedule_tomorrow' %}" class="staff-form">
+          {% csrf_token %}
+          <ul class="draft-list">
+            {% for q in drafts %}
+            <li class="{% if not q.answers.exists %}is-disabled{% endif %}">
+              <label class="draft-check">
+                <input type="checkbox" name="draft_ids" value="{{ q.pk }}" {% if not q.answers.exists %}disabled{% endif %}>
+                <span class="draft-check__text">
+                  <span class="draft-check__prompt">{{ q.prompt }}</span>
+                  <span class="draft-check__meta">{% if q.answers.exists %}{{ q.answers.count }} answer{{ q.answers.count|pluralize }}{% else %}no answers yet{% endif %}</span>
+                </span>
+              </label>
+            </li>
+            {% endfor %}
+          </ul>
+          {% if draft_total > drafts|length %}
+          <p class="staff-footnote">Showing {{ drafts|length }} of {{ draft_total }} drafts.</p>
+          {% endif %}
+          <button type="submit" class="btn btn--pink">Schedule selected</button>
+        </form>
+        {% else %}
+        <p class="staff-empty">No drafts. <a href="{{ admin_root }}game/question/add/">Add a question</a> or approve a suggestion.</p>
+        {% endif %}
+      </section>
+
+      <section class="staff-card">
+        <header class="staff-card__head">
+          <h2>Shortcuts</h2>
+        </header>
+        <ul class="staff-links">
+          <li><a href="{{ admin_root }}game/question/?when=today">Questions for today</a></li>
+          <li><a href="{{ admin_root }}game/question/?when=draft">Draft questions</a></li>
+          <li><a href="{{ admin_root }}game/question/add/">Add question</a></li>
+          {% if is_site_admin %}<li><a href="{% url 'staff_team' %}">Manage team</a></li>{% endif %}
+        </ul>
+      </section>
+    </aside>
+  </div>
+</div>
+{% endblock %}

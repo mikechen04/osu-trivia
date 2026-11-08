@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
 
 import accounts.views as accounts
 import core.views as core
+import game.staff_views as staff
 import game.views as game
 
 
@@ -48,6 +49,15 @@ urlpatterns = [
     path("cookies/", page("cookies"), name="cookies"),
     path("robots.txt", core.robots),
     path("healthz", core.healthz),
+    # Staff dashboard (main-site chrome) + classic Django admin for deep edits
+    path("staff/", staff.staff_home, name="staff_home"),
+    path("staff/day/<isodate:day>/", staff.staff_day, name="staff_day"),
+    path("staff/day/<isodate:day>/fill/", staff.staff_fill_day, name="staff_fill_day"),
+    path("staff/schedule-tomorrow/", staff.staff_schedule_tomorrow, name="staff_schedule_tomorrow"),
+    path("staff/unschedule/<int:pk>/", staff.staff_unschedule, name="staff_unschedule"),
+    path("staff/suggestions/<int:pk>/", staff.staff_review_suggestion, name="staff_review_suggestion"),
+    path("staff/team/", staff.staff_team, name="staff_team"),
+    path("staff/team/role/", staff.staff_set_role, name="staff_set_role"),
     path(settings.ADMIN_URL, admin.site.urls),
 ]
 

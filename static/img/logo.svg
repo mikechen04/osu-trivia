@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="1024" height="1024">
+  <title>osu! trivia logo</title>
+  <circle cx="100" cy="100" r="96" fill="none" stroke="#ff66aa" stroke-width="3" opacity="0.25"/>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#ff66aa" stroke-width="4" opacity="0.6"/>
+  <circle cx="100" cy="100" r="62" fill="#ff66aa" stroke="#ffffff" stroke-width="8"/>
+  <path transform="translate(100 101) scale(0.084 -0.084) translate(-265.5 -353.5)" fill="#ffffff" d="M196 253 161 379Q186 385 210.0 393.0Q234 401 255.0 411.0Q276 421 292.5 434.0Q309 447 318.0 463.5Q327 480 327 499Q327 515 320.0 525.5Q313 536 300.0 542.0Q287 548 270 548Q240 548 209.0 526.5Q178 505 149 451L24 570Q71 641 134.5 679.5Q198 718 268 718Q335 718 389.5 691.0Q444 664 475.5 616.5Q507 569 507 511Q507 472 491.0 434.0Q475 396 446.0 363.0Q417 330 378.0 305.5Q339 281 293 268L287 253ZM160 85Q160 127 186.0 154.0Q212 181 254 181Q298 181 323.0 156.0Q348 131 348 85Q348 43 321.5 16.0Q295 -11 254 -11Q209 -11 184.5 14.0Q160 39 160 85Z"/>
+</svg>

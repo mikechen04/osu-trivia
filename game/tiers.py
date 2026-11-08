@@ -12,12 +12,12 @@ class Tier:
 
 
 TIERS = {
-    0: Tier(0, "Miss", 0, "⬛"),
-    1: Tier(1, "Osu Chud", 10, "🟦"),
-    2: Tier(2, "Average Player", 30, "🟩"),
-    3: Tier(3, "Mechanically Gifted", 60, "🟨"),
-    4: Tier(4, "Genetics Abuser", 85, "🟧"),
-    5: Tier(5, "Veiny Zany", 100, "🟪"),
+    0: Tier(0, "miss", 0, "⬛"),
+    1: Tier(1, "osu chud", 10, "🟦"),
+    2: Tier(2, "average player", 30, "🟩"),
+    3: Tier(3, "mechanically gifted", 60, "🟨"),
+    4: Tier(4, "genetics abuser", 85, "🟧"),
+    5: Tier(5, "veiny zany", 100, "🟪"),
 }
 MAX_TIER = 5
 MAX_POINTS = TIERS[MAX_TIER].points

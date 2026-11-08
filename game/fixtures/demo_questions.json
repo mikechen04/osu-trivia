@@ -69,5 +69,205 @@
       {"text": "50", "aliases": ["fifty", "meh"], "tier": 3},
       {"text": "Miss", "aliases": ["0", "x", "missed"], "tier": 2}
     ]
+  },
+
+  {
+    "prompt": "Name a key count used in osu!mania",
+    "hint": "How many keys the chart is played with.",
+    "answers": [
+      {"text": "4K", "aliases": ["4", "four key", "4key"], "tier": 1},
+      {"text": "7K", "aliases": ["7", "seven key", "7key"], "tier": 1},
+      {"text": "5K", "aliases": ["5", "five key"], "tier": 2},
+      {"text": "6K", "aliases": ["6", "six key"], "tier": 2},
+      {"text": "8K", "aliases": ["8", "eight key"], "tier": 3},
+      {"text": "9K", "aliases": ["9", "nine key"], "tier": 4},
+      {"text": "1K", "aliases": ["1", "one key"], "tier": 5},
+      {"text": "2K", "aliases": ["2", "two key"], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name something on the osu! HUD / overlay",
+    "hint": "Stuff you see while playing or in the song select UI.",
+    "answers": [
+      {"text": "Accuracy", "aliases": ["acc"], "tier": 1},
+      {"text": "Combo", "aliases": [], "tier": 1},
+      {"text": "HP bar", "aliases": ["health", "health bar", "hp"], "tier": 2},
+      {"text": "Score", "aliases": [], "tier": 2},
+      {"text": "Hit error", "aliases": ["ur", "unstable rate", "hiterror"], "tier": 3},
+      {"text": "Progress bar", "aliases": ["song progress"], "tier": 3},
+      {"text": "Key overlay", "aliases": ["input overlay"], "tier": 4},
+      {"text": "Strain graph", "aliases": ["difficulty graph"], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name an osu!standard difficulty attribute you might see",
+    "hint": "Numbers on the beatmap page or in-game.",
+    "answers": [
+      {"text": "Star rating", "aliases": ["SR", "stars", "★"], "tier": 1},
+      {"text": "BPM", "aliases": ["beats per minute"], "tier": 1},
+      {"text": "AR", "aliases": ["approach rate"], "tier": 2},
+      {"text": "OD", "aliases": ["overall difficulty"], "tier": 2},
+      {"text": "CS", "aliases": ["circle size"], "tier": 2},
+      {"text": "HP", "aliases": ["HP drain", "drain"], "tier": 3},
+      {"text": "Aim", "aliases": ["aim strain"], "tier": 4},
+      {"text": "Speed", "aliases": ["speed strain"], "tier": 4},
+      {"text": "Flashlight", "aliases": ["FL rating"], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a ranking / leaderboard type on osu!",
+    "hint": "Ways player performance is listed.",
+    "answers": [
+      {"text": "Performance", "aliases": ["pp", "pp ranking"], "tier": 1},
+      {"text": "Score", "aliases": ["ranked score"], "tier": 2},
+      {"text": "Country", "aliases": ["country ranking"], "tier": 2},
+      {"text": "Loved", "aliases": ["loved ranking"], "tier": 3},
+      {"text": "Kudosu", "aliases": [], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a skin element in osu!",
+    "hint": "Files or pieces that make up a skin.",
+    "answers": [
+      {"text": "Cursor", "aliases": [], "tier": 1},
+      {"text": "Hitcircle", "aliases": ["circle", "hit circle"], "tier": 1},
+      {"text": "Slider body", "aliases": ["slider"], "tier": 2},
+      {"text": "Spinner", "aliases": [], "tier": 2},
+      {"text": "Approach circle", "aliases": [], "tier": 3},
+      {"text": "Follow point", "aliases": ["followpoints"], "tier": 3},
+      {"text": "Reverse arrow", "aliases": ["reverse"], "tier": 4},
+      {"text": "Hitburst", "aliases": ["hit burst", "judgement"], "tier": 4},
+      {"text": "Lighting", "aliases": ["kiai lighting"], "tier": 5}
+    ]
+  },
+
+  {
+    "prompt": "Name a PP-related term players talk about",
+    "hint": "Performance points slang and systems.",
+    "answers": [
+      {"text": "pp", "aliases": ["performance points"], "tier": 1},
+      {"text": "FC", "aliases": ["full combo"], "tier": 1},
+      {"text": "SS", "aliases": ["perfect"], "tier": 2},
+      {"text": "Choke", "aliases": ["choked"], "tier": 2},
+      {"text": "Farm", "aliases": ["farm map", "farming"], "tier": 3},
+      {"text": "Weighted pp", "aliases": ["bonus pp", "weight"], "tier": 4},
+      {"text": "BWS", "aliases": ["badge weighted seeding"], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name an osu! client or lazer-related thing",
+    "hint": "Versions / clients people play on.",
+    "answers": [
+      {"text": "Stable", "aliases": ["osu!stable", "cutting edge"], "tier": 1},
+      {"text": "Lazer", "aliases": ["osu!lazer"], "tier": 1},
+      {"text": "Compatibility mode", "aliases": ["compat"], "tier": 3},
+      {"text": "Tournament client", "aliases": ["tourney client"], "tier": 4},
+      {"text": "McOsu", "aliases": ["mcosu"], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a common osu! tournament or series",
+    "hint": "Big community events (past or present).",
+    "answers": [
+      {"text": "OWC", "aliases": ["osu world cup", "osu! world cup"], "tier": 1},
+      {"text": "TWC", "aliases": ["taiko world cup"], "tier": 2},
+      {"text": "CWC", "aliases": ["catch world cup"], "tier": 2},
+      {"text": "MWC", "aliases": ["mania world cup"], "tier": 2},
+      {"text": "GMT", "aliases": ["global mania tournament"], "tier": 4},
+      {"text": "AYBIPB", "aliases": [], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a mapper or mapping-related role",
+    "hint": "People who make or check maps.",
+    "answers": [
+      {"text": "Mapper", "aliases": ["mapset host", "host"], "tier": 1},
+      {"text": "BN", "aliases": ["beatmap nominator", "nominator"], "tier": 2},
+      {"text": "NAT", "aliases": ["nomination assessment team"], "tier": 3},
+      {"text": "Guest difficulty", "aliases": ["GD", "guest diff"], "tier": 3},
+      {"text": "Metadata", "aliases": ["metadata checker"], "tier": 4},
+      {"text": "Bubble", "aliases": ["bubbled"], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a chat / social feature on osu!",
+    "hint": "Ways players talk or hang out in-game.",
+    "answers": [
+      {"text": "Multiplayer", "aliases": ["multi", "lobby", "mp"], "tier": 1},
+      {"text": "Spectator", "aliases": ["watch", "spectate"], "tier": 2},
+      {"text": "Friends", "aliases": ["friend list"], "tier": 2},
+      {"text": "Channels", "aliases": ["chat channel", "#osu"], "tier": 3},
+      {"text": "Beatmap discussion", "aliases": ["modding discussion", "discussions"], "tier": 3},
+      {"text": "Kudosu", "aliases": [], "tier": 4},
+      {"text": "Playlists", "aliases": ["lazer playlists"], "tier": 5}
+    ]
+  },
+
+  {
+    "prompt": "Name a sample / hitsound category",
+    "hint": "Sound sets used in mapping.",
+    "answers": [
+      {"text": "Normal", "aliases": [], "tier": 1},
+      {"text": "Soft", "aliases": [], "tier": 1},
+      {"text": "Drum", "aliases": [], "tier": 2},
+      {"text": "Whistle", "aliases": [], "tier": 2},
+      {"text": "Finish", "aliases": ["cymbal"], "tier": 3},
+      {"text": "Clap", "aliases": [], "tier": 3},
+      {"text": "Custom sample", "aliases": ["custom hitsound"], "tier": 4}
+    ]
+  },
+  {
+    "prompt": "Name an editor tool or mapping concept",
+    "hint": "Things you use while mapping in the editor.",
+    "answers": [
+      {"text": "Timeline", "aliases": [], "tier": 1},
+      {"text": "Distance snap", "aliases": ["ds", "snap"], "tier": 2},
+      {"text": "Grid snap", "aliases": ["grid"], "tier": 2},
+      {"text": "SV", "aliases": ["slider velocity", "scroll velocity"], "tier": 2},
+      {"text": "Kiai", "aliases": ["kiai time"], "tier": 3},
+      {"text": "Inheritance point", "aliases": ["green line", "greenlines"], "tier": 4},
+      {"text": "Timing point", "aliases": ["red line", "redlines", "uninherited"], "tier": 3},
+      {"text": "AiMod", "aliases": ["ai mod"], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a hardware / playstyle thing osu! players argue about",
+    "hint": "Peripherals and techniques.",
+    "answers": [
+      {"text": "Tablet", "aliases": ["drawing tablet", "wacom"], "tier": 1},
+      {"text": "Mouse", "aliases": [], "tier": 1},
+      {"text": "Keyboard", "aliases": ["mech", "mechanical keyboard"], "tier": 2},
+      {"text": "Area", "aliases": ["tablet area"], "tier": 3},
+      {"text": "Raw input", "aliases": [], "tier": 3},
+      {"text": "Finger lock", "aliases": ["locking"], "tier": 4},
+      {"text": "Hybrid", "aliases": ["hybrid tapping"], "tier": 4},
+      {"text": "Screen grip", "aliases": [], "tier": 5}
+    ]
+  },
+  {
+    "prompt": "Name a famous osu! player (or very well-known name)",
+    "hint": "Highly recognizable community names — spelling can vary.",
+    "answers": [
+      {"text": "Cookiezi", "aliases": ["chocomint", "shigetora"], "tier": 1},
+      {"text": "Vaxei", "aliases": [], "tier": 2},
+      {"text": "mrekk", "aliases": ["m rek", "mrekkosu"], "tier": 2},
+      {"text": "WhiteCat", "aliases": ["whitecat"], "tier": 2},
+      {"text": "rafis", "aliases": [], "tier": 3},
+      {"text": "idke", "aliases": [], "tier": 3},
+      {"text": "Azer", "aliases": [], "tier": 4},
+      {"text": "btmc", "aliases": ["heenix", "btmc osu"], "tier": 3}
+    ]
+  },
+  {
+    "prompt": "Name a medley / storyboard / extras feature",
+    "hint": "Non-gameplay content around a mapset.",
+    "answers": [
+      {"text": "Storyboard", "aliases": ["SB"], "tier": 1},
+      {"text": "Video", "aliases": ["bg video"], "tier": 2},
+      {"text": "Background", "aliases": ["BG", "background image"], "tier": 1},
+      {"text": "Epilepsy warning", "aliases": ["ew"], "tier": 3},
+      {"text": "Widescreen storyboard", "aliases": ["wsb"], "tier": 4},
+      {"text": "Skinning in SB", "aliases": ["storyboard skin"], "tier": 5}
+    ]
   }
 ]

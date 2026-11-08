@@ -83,6 +83,7 @@ class PageTests(TestCase):
     def test_robots_hides_admin_and_api(self):
         body = Client().get("/robots.txt").content.decode()
         self.assertIn("Disallow: /admin/", body)
+        self.assertIn("Disallow: /staff/", body)
         self.assertIn("Disallow: /api/", body)
 
     def test_home_cta_follows_state(self):

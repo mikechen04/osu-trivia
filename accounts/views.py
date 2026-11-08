@@ -18,7 +18,7 @@ from django.views.decorators.http import require_GET, require_http_methods, requ
 from core.ratelimit import ratelimit
 from game.models import Attempt
 
-from . import osu
+from . import osu, roles
 from .models import User
 
 log = logging.getLogger(__name__)
@@ -40,9 +40,8 @@ def _sign_in(request, profile: dict, *, accepted_terms: bool) -> User:
     user.country_code = profile["country_code"]
     if accepted_terms:
         user.tos_accepted_at = timezone.now()
-    if profile["osu_id"] in settings.ADMIN_OSU_IDS:
-        user.is_staff = user.is_superuser = True
     user.save()
+    roles.apply_bootstrap_admin(user)
     login(request, user, backend=BACKEND)
     return user
 
@@ -120,9 +119,11 @@ def dev_login(request):
             country = request.POST.get("country", "")[:2].upper()
             profile = osu.parse_profile({"id": osu_id, "username": name, "avatar_url": "", "country_code": country})
             user = _sign_in(request, profile, accepted_terms=True)
-            if request.POST.get("admin"):
-                user.is_staff = user.is_superuser = True
-                user.save()
+            role = request.POST.get("role", "player")
+            if role in {roles.ROLE_MODERATOR, roles.ROLE_ADMIN}:
+                roles.set_role(user, role)
+            elif role == roles.ROLE_PLAYER and user.osu_id not in settings.ADMIN_OSU_IDS:
+                roles.set_role(user, roles.ROLE_PLAYER)
             return redirect(_safe_next(request, request.POST.get("next")))
     return render(request, "accounts/dev_login.html", {"next": request.GET.get("next", "/play/")})
 

@@ -65,7 +65,7 @@ def not_found(request, exception=None):
 
 @require_GET
 def robots(request):
-    body = f"User-agent: *\nDisallow: /{settings.ADMIN_URL}\nDisallow: /api/\nDisallow: /account/\n"
+    body = f"User-agent: *\nDisallow: /{settings.ADMIN_URL}\nDisallow: /staff/\nDisallow: /api/\nDisallow: /account/\n"
     return HttpResponse(body, content_type="text/plain")
 
 

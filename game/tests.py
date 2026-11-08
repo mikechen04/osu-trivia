@@ -160,7 +160,7 @@ class GameFlowTests(TestCase):
     def test_invalid_and_empty_answers_score_zero(self):
         state = play_all(self.user, ["", "zzz", "A", "   ", "Meh"])
         self.assertEqual([a["points"] for a in state["answered"]], [0, 0, 10, 0, 85])
-        self.assertEqual(state["answered"][0]["tier_name"], "Miss")
+        self.assertEqual(state["answered"][0]["tier_name"], "miss")
 
     def test_timer_is_enforced_by_server(self):
         with at(T0):
@@ -456,7 +456,7 @@ class SharePageTests(TestCase):
         self.assertIn('property="og:title" content="Player1 scored 160/500 on osu! trivia"', html)
         self.assertIn("🟦🟩🟪🟦🟦", html)
         self.assertIn("/u/Player1/2026-11-07/", html)
-        html = html.replace("Veiny Zany", "")  # a tier name, not an answer
+        html = html.replace("veiny zany", "")  # a tier name, not an answer
         for word in ["Hidden", "Taiko", "Silver S", "Ranked", "Great"]:
             self.assertNotIn(word, html)
 

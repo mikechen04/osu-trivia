@@ -1,0 +1,50 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'admin/css/dashboard.css' %}">{% endblock %}
+
+{% block coltype %}{% endblock %}
+{% block bodyclass %}{{ block.super }} dashboard simple-admin{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+<div id="content-main" class="simple-home">
+  <p class="simple-lead">Pick what you want to do. Day-to-day scheduling is easier on the <a href="{% url 'staff_home' %}">Staff dashboard</a>.</p>
+
+  <div class="simple-cards">
+    <a class="simple-card" href="{% url 'admin:game_question_changelist' %}">
+      <strong>Questions</strong>
+      <span>Write prompts, accepted answers, aliases and starting rarities. Set a date + position (1–5) to schedule.</span>
+    </a>
+    <a class="simple-card" href="{% url 'admin:game_question_add' %}">
+      <strong>Add a question</strong>
+      <span>Blank form with room for several accepted answers.</span>
+    </a>
+    <a class="simple-card" href="{% url 'admin:core_suggestion_changelist' %}?status__exact=pending">
+      <strong>Suggestions</strong>
+      <span>Approve or reject player ideas. Approve makes an unscheduled draft.</span>
+    </a>
+    <a class="simple-card" href="{% url 'admin:game_question_changelist' %}?when=draft">
+      <strong>Drafts</strong>
+      <span>Questions with no date yet. Select some, then use “Schedule into next open slots”.</span>
+    </a>
+    <a class="simple-card" href="{% url 'admin:game_question_changelist' %}?when=today">
+      <strong>Today’s set</strong>
+      <span>Whatever is scheduled for today’s UTC date.</span>
+    </a>
+    <a class="simple-card" href="{% url 'staff_home' %}">
+      <strong>Staff dashboard</strong>
+      <span>Friendlier view: rarities, fill tomorrow, review queue, team (admins).</span>
+    </a>
+    {% if user.is_superuser %}
+    <a class="simple-card" href="{% url 'admin:accounts_user_changelist' %}">
+      <strong>Players</strong>
+      <span>Admins only. Prefer Staff → Team to change moderators.</span>
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}

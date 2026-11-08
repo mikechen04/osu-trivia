@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | osu! trivia admin{% endblock %}
+
+{% block dark-mode-vars %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+  <link rel="icon" href="{% static 'img/logo.svg' %}" type="image/svg+xml">
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+  <a href="{% url 'admin:index' %}">
+    <img class="admin-logo" src="{% static 'img/logo.svg' %}" alt="" width="28" height="28">
+    <span class="brand-osu">osu!</span> trivia admin
+  </a>
+</h1>
+<a class="admin-home-link" href="{% url 'staff_home' %}">Staff dashboard</a>
+<a class="admin-home-link" href="{% url 'admin:index' %}">Admin home</a>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
